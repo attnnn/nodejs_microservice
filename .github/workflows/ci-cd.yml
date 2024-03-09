@@ -13,8 +13,8 @@ jobs:
       matrix:
         node-version: [14.x, 16.x]
 
-   # env:
-   #   PROJECT_PATH: /nodejs_shopping
+    env:
+      PROJECT_PATH: /nodejs_shopping
 
     steps:
       - name: Checkout Repository
@@ -26,16 +26,16 @@ jobs:
           node-version: ${{ matrix.node-version }}    
 
       - name: Build Backend with NPM
-        #working-directory: ${{ github.workspace }}/nodejs_microservice_backend
+        working-directory: ${{ github.workspace }}/nodejs_microservice_backend
         run: |
-          cd nodejs_microservice_backend
+          #cd nodejs_microservice_backend
           npm ci
           npm run build
 
       - name: Build Frontend with NPM
-        #working-directory: ${{ github.workspace }}/shopping_app_frontend
+        working-directory: ${{ github.workspace }}/shopping_app_frontend
         run: |
-          cd shopping_app_frontend
+          #cd shopping_app_frontend
           npm ci
           npm run build
       
