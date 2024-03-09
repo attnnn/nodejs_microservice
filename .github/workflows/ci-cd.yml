@@ -52,7 +52,7 @@ jobs:
       
       - name: Build Frontend with NPM        
         run: |
-          cd shopping_app_frontend
+          cd frontend
           ls
           docker build -t frontend:${{ github.sha }} .
           
