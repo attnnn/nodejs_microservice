@@ -13,8 +13,8 @@ jobs:
       matrix:
         node-version: [16.x]
 
-    env:
-      PROJECT_PATH: /nodejs_shopping
+    #env:
+     # PROJECT_PATH: /nodejs_shopping
 
     steps:
       - name: Checkout Repository
