@@ -33,8 +33,7 @@ jobs:
           EXCHANGE_NAME: ${{ secrets.EXCHANGE_NAME }}
           PORT: ${{ secrets.PORT_PRODUCTS }} 
         run: |  
-          cd nodejs_microservice_backend/products 
-          npm ci          
+          cd nodejs_microservice_backend/products                     
           docker build -t nodejsshop:${{ github.sha }} .
 
       - name: Build Frontend with NPM
