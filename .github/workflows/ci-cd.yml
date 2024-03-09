@@ -8,26 +8,35 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+  
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x]
 
    # env:
    #   PROJECT_PATH: /nodejs_shopping
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2      
+        uses: actions/checkout@v2  
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}    
 
       - name: Build Backend with NPM
-        working-directory: ${{ github.workspace }}/nodejs_microservice_backend
+        #working-directory: ${{ github.workspace }}/nodejs_microservice_backend
         run: |
-         # cd nodejs_microservice-master
-          npm install
+          cd nodejs_microservice-master
+          npm ci
           npm run build
 
       - name: Build Frontend with NPM
-        working-directory: ${{ github.workspace }}/shopping_app_frontend
+        #working-directory: ${{ github.workspace }}/shopping_app_frontend
         run: |
-         # cd shopping_app_frontend
-          npm install
+          cd shopping_app_frontend
+          npm ci
           npm run build
       
       - name: Build Frontend with NPM
