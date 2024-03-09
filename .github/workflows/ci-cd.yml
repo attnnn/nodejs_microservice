@@ -48,13 +48,15 @@ jobs:
           echo EXCHANGE_NAME=${{ secrets.EXCHANGE_NAME }} >> .env
           echo PORT=${{ secrets.PORT_PRODUCTS }} >> .env
           cat .env                    
-          docker build -t backendproduct:${{ github.sha }} .
+          docker build -t backendproduct .
+          docker tag backendproduct:latest ${{ secrets.ecr_repo }}/backendproduct:${{ github.sha }}
       
       - name: Build Frontend with NPM        
         run: |
           cd frontend
           ls
           docker build -t frontend:${{ github.sha }} .
+          docker tag frontend:latest ${{ secrets.ecr_repo }}/frontend:latest
           
 
       - name: Push Docker image to ECR
