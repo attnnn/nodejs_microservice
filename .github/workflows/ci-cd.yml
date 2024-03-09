@@ -25,16 +25,17 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}    
 
-      - name: Build Backend with NPM
-        #working-directory: ./nodejs_microservice_backend/products/
+      - name: Build products Backend with NPM
+        env:
+          APP_SECRET: ${{ secrets.APP_SECRET }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          MSG_QUEUE_URL: ${{ secrets.MSG_QUEUE_URL }}
+          EXCHANGE_NAME: ${{ secrets.EXCHANGE_NAME }}
+          PORT: ${{ secrets.PORT_PRODUCTS }} 
         run: |  
-          echo "zero"       
           cd nodejs_microservice_backend/products 
-          echo "one"       
-          npm ci
-          echo "two"       
-          npm run dev --if-present
-          echo "three"       
+          npm ci          
+          docker build --build-arg -t ${{ secrets.EXCHANGE_NAME }}:${{ github.sha }} .
 
       - name: Build Frontend with NPM
         working-directory: ./shopping_app_frontend
