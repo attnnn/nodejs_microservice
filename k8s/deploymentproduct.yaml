@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-product
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend-product
+  template:
+    metadata:
+      labels:
+        app: backend-product
+    spec:
+      containers:
+      - name: backend-product
+        image: backendproduct:${{ github.sha }}
+        

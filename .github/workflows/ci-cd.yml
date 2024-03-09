@@ -23,7 +23,14 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}    
+          node-version: ${{ matrix.node-version }} 
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: "us-east-1"   
 
       - name: Build products Backend with NPM
         env:
@@ -41,14 +48,35 @@ jobs:
           echo EXCHANGE_NAME=${{ secrets.EXCHANGE_NAME }} >> .env
           echo PORT=${{ secrets.PORT_PRODUCTS }} >> .env
           cat .env                    
-          docker build -t nodejsshop:${{ github.sha }} .
-
+          docker build -t backendproduct:${{ github.sha }} .
+      
       - name: Build Frontend with NPM        
         run: |
-          cd frontend
+          cd shopping_app_frontend
           ls
           docker build -t frontend:${{ github.sha }} .
+          
+
+      - name: Push Docker image to ECR
+        run: |
+         aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ secrets.ecr_repo }}     
+         docker push ${{ secrets.ecr_repo }}/backendproduct:latest
+         docker push ${{ secrets.ecr_repo }}/frontend:latest
+
+      - name: Update Kubernetes config
+        run: |
+          aws eks --region "us-east-1" update-kubeconfig --name "awseks"
+
+
+      - name: Deply to k8s        
+        run: |
+          cd k8s
+          kubectl apply -f deploymentfrontend.yaml
+          kubectl apply -f deploymentproduct.yaml
+          kubectl apply -f servicefrontend.yaml
+          kubectl apply -f serviceproduct.yaml
+          kubectl apply -f ingressfrontend.yaml
       
-      - name: Build Frontend with NPMnew
+      - name: completed
         run: |
           echo "Finished"
