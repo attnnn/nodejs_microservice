@@ -55,7 +55,7 @@ jobs:
         run: |
           cd frontend
           ls
-          docker build -t frontend:${{ github.sha }} .
+          docker build -t frontend .
           docker tag frontend:latest ${{ secrets.ecr_repo }}/frontend:${{ github.sha }}
           
 
