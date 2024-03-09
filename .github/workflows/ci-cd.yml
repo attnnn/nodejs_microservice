@@ -43,13 +43,11 @@ jobs:
           cat .env                    
           docker build -t nodejsshop:${{ github.sha }} .
 
-      - name: Build Frontend with NPM
-        working-directory: ./shopping_app_frontend
+      - name: Build Frontend with NPM        
         run: |
-          #cd shopping_app_frontend
-          npm ci
-          npm run build
+          cd shopping_app_frontend
+          docker build -t nodejsshopfrontend:${{ github.sha }} .
       
-      - name: Build Frontend with NPM
+      - name: Build Frontend with NPMnew
         run: |
           echo "Finished"
