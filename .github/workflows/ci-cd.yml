@@ -28,9 +28,13 @@ jobs:
       - name: Build Backend with NPM
         #working-directory: ./nodejs_microservice_backend/products/
         run: |  
-          cd nodejs_microservice_backend/products        
+          echo "zero"       
+          cd nodejs_microservice_backend/products 
+          echo "one"       
           npm ci
-          npm run build
+          echo "two"       
+          npm run build --if-present
+          echo "three"       
 
       - name: Build Frontend with NPM
         working-directory: ./shopping_app_frontend
