@@ -28,7 +28,7 @@ jobs:
       - name: Build Backend with NPM
         #working-directory: ${{ github.workspace }}/nodejs_microservice_backend
         run: |
-          cd nodejs_microservice-master
+          cd nodejs_microservice_backend
           npm ci
           npm run build
 
