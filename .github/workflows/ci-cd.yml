@@ -28,7 +28,7 @@ jobs:
       - name: Build Backend with NPM
         #working-directory: ./nodejs_microservice_backend/products/
         run: |  
-          cd ./nodejs_microservice_backend/products        
+          cd nodejs_microservice_backend/products        
           npm ci
           npm run build
 
