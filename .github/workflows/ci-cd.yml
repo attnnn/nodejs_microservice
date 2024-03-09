@@ -14,14 +14,16 @@ jobs:
         uses: actions/checkout@v2      
 
       - name: Build Backend with NPM
+        working-directory: nodejs_microservice-master
         run: |
-          cd nodejs_microservice-master
+         # cd nodejs_microservice-master
           npm install
           npm run build
 
       - name: Build Frontend with NPM
+        working-directory: shopping_app_frontend
         run: |
-          cd shopping_app_frontend
+         # cd shopping_app_frontend
           npm install
           npm run build
       
