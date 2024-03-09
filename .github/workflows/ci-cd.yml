@@ -9,19 +9,22 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    env:
+      PROJECT_PATH: /nodejs_shopping
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2      
 
       - name: Build Backend with NPM
-        working-directory: nodejs_microservice-master
+        working-directory: ${{ github.workspace }}/nodejs_microservice-master
         run: |
          # cd nodejs_microservice-master
           npm install
           npm run build
 
       - name: Build Frontend with NPM
-        working-directory: shopping_app_frontend
+        working-directory: ${{ github.workspace }}/shopping_app_frontend
         run: |
          # cd shopping_app_frontend
           npm install
