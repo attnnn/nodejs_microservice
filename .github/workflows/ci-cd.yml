@@ -33,7 +33,7 @@ jobs:
           echo "one"       
           npm ci
           echo "two"       
-          npm run build --if-present
+          npm run dev --if-present
           echo "three"       
 
       - name: Build Frontend with NPM
