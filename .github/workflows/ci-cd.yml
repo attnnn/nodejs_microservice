@@ -60,8 +60,8 @@ jobs:
       - name: Push Docker image to ECR
         run: |
          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ secrets.ecr_repo }}     
-         docker push ${{ secrets.ecr_repo }}/backendproduct:latest
-         docker push ${{ secrets.ecr_repo }}/frontend:latest
+         docker push ${{ secrets.ecr_repo }}/backendproduct:${{ github.sha }}
+         docker push ${{ secrets.ecr_repo }}/frontend:${{ github.sha }}
 
       - name: Update Kubernetes config
         run: |
