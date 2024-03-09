@@ -33,7 +33,14 @@ jobs:
           EXCHANGE_NAME: ${{ secrets.EXCHANGE_NAME }}
           PORT: ${{ secrets.PORT_PRODUCTS }} 
         run: |  
-          cd nodejs_microservice_backend/products                     
+          cd nodejs_microservice_backend/products 
+          touch .env
+          echo APP_SECRET=${{ secrets.APP_SECRET }} >> .env
+          echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
+          echo MSG_QUEUE_URL=${{ secrets.MSG_QUEUE_URL }} >> .env
+          echo EXCHANGE_NAME=${{ secrets.EXCHANGE_NAME }} >> .env
+          echo PORT=${{ secrets.PORT_PRODUCTS }} >> .env
+          cat .env                    
           docker build -t nodejsshop:${{ github.sha }} .
 
       - name: Build Frontend with NPM
