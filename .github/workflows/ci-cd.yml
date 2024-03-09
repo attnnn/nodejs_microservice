@@ -26,9 +26,8 @@ jobs:
           node-version: ${{ matrix.node-version }}    
 
       - name: Build Backend with NPM
-        working-directory: ./nodejs_microservice_backend/products
-        run: |
-          #cd nodejs_microservice_backend
+        working-directory: ./nodejs_microservice_backend/products/
+        run: |          
           npm ci
           npm run build
 
