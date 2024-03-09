@@ -26,14 +26,14 @@ jobs:
           node-version: ${{ matrix.node-version }}    
 
       - name: Build Backend with NPM
-        working-directory: ${{ github.workspace }}/nodejs_microservice_backend
+        working-directory: ./nodejs_microservice_backend
         run: |
           #cd nodejs_microservice_backend
           npm ci
           npm run build
 
       - name: Build Frontend with NPM
-        working-directory: ${{ github.workspace }}/shopping_app_frontend
+        working-directory: ./shopping_app_frontend
         run: |
           #cd shopping_app_frontend
           npm ci
