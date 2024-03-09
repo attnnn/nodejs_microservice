@@ -1,0 +1,30 @@
+name: nodejs microservices CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main          # Trigger workflow on push to main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2      
+
+      - name: Build Backend with NPM
+        run: |
+          cd nodejs_microservice-master
+          npm install
+          npm run build
+
+      - name: Build Frontend with NPM
+        run: |
+          cd shopping_app_frontend
+          npm install
+          npm run build
+      
+      - name: Build Frontend with NPM
+        run: |
+          echo "Finished"
