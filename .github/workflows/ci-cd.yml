@@ -56,7 +56,7 @@ jobs:
           cd frontend
           ls
           docker build -t frontend:${{ github.sha }} .
-          docker tag frontend:latest ${{ secrets.ecr_repo }}/frontend:latest
+          docker tag frontend:latest ${{ secrets.ecr_repo }}/frontend:${{ github.sha }}
           
 
       - name: Push Docker image to ECR
