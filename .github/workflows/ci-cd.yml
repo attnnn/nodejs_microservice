@@ -35,7 +35,7 @@ jobs:
         run: |  
           cd nodejs_microservice_backend/products 
           npm ci          
-          docker build -t ${{ secrets.EXCHANGE_NAME }}:${{ github.sha }} .
+          docker build -t nodejsshop:${{ github.sha }} .
 
       - name: Build Frontend with NPM
         working-directory: ./shopping_app_frontend
