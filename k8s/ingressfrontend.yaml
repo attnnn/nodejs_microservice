@@ -3,7 +3,8 @@ kind: Ingress
 metadata:
   name: frontend-ingress
   annotations:
-    kubernetes.io/ingress.class: "nginx"
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/target-type: instance
 spec:
   rules:
     - http:
