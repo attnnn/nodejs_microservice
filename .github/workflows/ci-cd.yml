@@ -59,7 +59,7 @@ jobs:
           docker tag frontend:${{ github.sha }} ${{ secrets.ecr_repo }}/frontend:${{ github.sha }}
           
 
-      - name: Push Docker image to ECR.
+      - name: Push Docker image to ECR
         run: |
          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ secrets.ecr_repo }}     
          docker push ${{ secrets.ecr_repo }}/backendproduct:${{ github.sha }}
