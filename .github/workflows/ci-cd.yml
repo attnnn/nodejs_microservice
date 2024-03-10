@@ -80,6 +80,7 @@ jobs:
           kubectl apply -f deploymentproduct.yaml
           kubectl apply -f servicefrontend.yaml
           kubectl apply -f serviceproduct.yaml
+          kubectl apply -f ingressclassfrontend.yaml
           kubectl apply -f ingressfrontend.yaml
       
       - name: completed
