@@ -14,5 +14,5 @@ spec:
     spec:
       containers:
       - name: backend-product
-        image: backendproduct:${{ github.sha }}
+        image: ${{ secrets.ecr_repo_product }}/backendproduct:latest
         

@@ -57,8 +57,8 @@ jobs:
         run: |
           cd frontend
           ls
-          docker build -t frontend:${{ github.sha }} .
-          docker tag frontend:${{ github.sha }} ${{ secrets.ecr_repo }}/frontend:${{ github.sha }}
+          docker build -t frontend .
+          docker tag frontend:latest ${{ secrets.ecr_repo_frontend }}/frontend:latest
           
 
       - name: Push Docker image to ECR
@@ -66,7 +66,7 @@ jobs:
          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ secrets.ecr_repo }} 
          docker push ${{ secrets.ecr_repo_product }}/backendproduct:latest    
          #docker push ${{ secrets.ecr_repo_product }}/backendproduct:${{ github.sha }}         
-         docker push ${{ secrets.ecr_repo }}/frontend:${{ github.sha }}
+         docker push ${{ secrets.ecr_repo_frontend }}/frontend:latest
 
       - name: Update Kubernetes config
         run: |
